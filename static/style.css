@@ -1,5 +1,5 @@
 :root {
-  --lk: #ffff00;
+  --lk: #27BA23;
   --text: #fefefe;
   --no: #b81800;
   --bg: #000;
@@ -60,7 +60,7 @@ h2 {
 
 .post > h3 {
   display: inline-block;
-  color: yellow;
+  color: #27BA23;
 }
 
 

@@ -14,7 +14,8 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  background:
+  background-attachment: fixed; /* This is the key! Fixes the background in place */
+  background-image:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("./background.jpg");
   color: var(--text);
 }
@@ -31,6 +32,10 @@ img {
   max-width: 20vw;
 }
 
+strong {
+  color: var(--lk);
+}
+
 .article {
   word-wrap: break-word;
   font-size: 20px;
@@ -43,6 +48,11 @@ img {
 h1,
 h2 {
   text-align: center;
+  color: var(--lk);
+}
+
+h3 {
+  color: var(--lk);
 }
 
 .post {
@@ -67,7 +77,7 @@ h2 {
 main,
 header,
 footer {
-  max-width: 800px;
+  max-width: 910px;
   margin-left: 10%;
   background: #010101;
   padding: 0.2rem 0.5rem;

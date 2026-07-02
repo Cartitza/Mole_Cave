@@ -41,7 +41,7 @@ jobs:
 
       - name: Sync the files
         run: |
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" ./public/ mole@100.88.185.69:${{ secrets.WEBSITE_PATH }}
+          rsync -rlz --delete --no-times --no-perms -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" ./public/ mole@100.88.185.69:${{ secrets.WEBSITE_PATH }}
 
       - name: restart the compose
         run: |

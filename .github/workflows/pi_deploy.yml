@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Site GitHub Action
 run-name: ${{ github.actor }} is updating his website ;3
 on: [push]
 jobs:

@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is updating his website ;3
 on: [push]
 jobs:
   Explore-GitHub-Actions:
@@ -17,10 +17,32 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-      - name: Tailscale
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.163.3"
+
+      - name: Build Website
+        run: |
+          hugo build
+
+      - name: Copy SSH key
+        run: |
+          mkdir -p ~/.ssh
+              echo "${{ secrets.PI_PUBLIC_KEY }}" > ~/.ssh/id_ed25519
+              chmod 600 ~/.ssh/id_ed25519
+
+      - name: Tailscale Connection
         uses: tailscale/github-action@v4
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: tag:cd
-          ping: 100.88.185.69
+
+      - name: Sync the files
+        run: |
+          rsync -a ./public/ mole@100.88.185.69:${{ secrets.WEBSITE_PATH }}
+
+      - name: restart the compose
+        run: |
+          docker compose restart molecave

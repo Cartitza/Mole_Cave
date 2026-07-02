@@ -33,11 +33,8 @@ jobs:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: tag:cd
+          ephemeral: true
 
       - name: Sync the files
         run: |
           rsync -rlz --delete --no-times --no-perms -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" ./public/ mole@100.88.185.69:${{ secrets.WEBSITE_PATH }}
-
-      - name: Cleanup
-        run: |
-          rm -rf ~
